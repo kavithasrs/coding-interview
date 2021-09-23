@@ -3,18 +3,17 @@ package com.practice.codinginterview.string;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UniqueCharacters {
 
     public static void main(String[] args) {
-    String input = "kkkkkk";
-
-        System.out.println("The string is " + (isStringHasUniqueCharacters(input) ? "is unique" : "not unique"));
-
-        countDuplicateCharacters(input);
-
+    String input = "kkkkkkaavvrrrtt";
+       // System.out.println("The string is " + (isStringHasUniqueCharacters(input) ? "is unique" : "not unique"));
+        //countDuplicateCharacters(input);
+        //countDuplicateCharactersUsingStreams(input);
+        countDuplicateCharactersUsingMap(input);
     }
-
 
     public static boolean isStringHasUniqueCharacters(String input){
         boolean isUnique = true;
@@ -57,6 +56,23 @@ public class UniqueCharacters {
 
 
 
+    }
+
+    public static void countDuplicateCharactersUsingStreams(String input){
+
+        Map<Character, Long> result = input.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+        System.out.println(result);
+
+    }
+
+    public static void countDuplicateCharactersUsingMap(String str){
+        Map<Character, Integer> result = new HashMap<>();
+        for(char ch: str.toCharArray())  {
+            result.compute(ch, (k, v) -> (v == null) ? 1 : ++v);
+        }
+        System.out.println(result);
     }
 
 }
