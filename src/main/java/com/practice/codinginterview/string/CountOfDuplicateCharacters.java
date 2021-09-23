@@ -1,36 +1,40 @@
 package com.practice.codinginterview.string;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CountOfDuplicateCharacters {
     public static void main(String[] args) {
 
-        printCharacterCount("sdfbmfbsdmfbmfsbgm");
+        printCharacterCount("key key west west east is west north is best");
 
     }
 
-    public static boolean printCharacterCount(String s){
-        boolean b = true;
-        Map<Character, Integer> charMap = new HashMap<>();
-        for(char ch : s.toCharArray()){
+    public static void printCharacterCount(String s) {
 
-            //if adding the key for the first time set the count as 1, else set the count to existing value
-            int count = (charMap.get(ch) == null) ? 1 : charMap.get(ch);//  1, 1, 2
+        Map<String, Integer> charMap = new HashMap<>();
 
-            //System.out.println("key: " + ch + " value: " + charMap.get(ch));
-            //if it already contains that key increment the count
-            if (charMap.containsKey(ch)) { // false true  true
-                count++;                   //        2    3
+        for (String word : s.split(" ")) {
+
+            int count = 0;
+            if(charMap.get(word) == null){
+                count = 1;
+            } else count = charMap.get(word);
+
+            if(charMap.containsKey(word)){
+                count++;
             }
-            // adding the key to the map with the value as count
-            charMap.put(ch,count); // k-1, k-2, k-3
 
-        }
+            charMap.put(word, count);
+
+            }
         charMap.forEach((k,v) -> {
-            if (v >1)
-                System.out.println(k + " occurs " + v + "times");
+            if(v>1) System.out.println(k + " occurs " + v + " times");
         });
-        return b;
+        }
+
+
+
     }
-}
