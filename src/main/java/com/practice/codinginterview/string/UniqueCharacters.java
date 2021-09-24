@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 public class UniqueCharacters {
 
     public static void main(String[] args) {
-    String input = "kkkkkkaavvrrrtt";
+    String input = "kkkkkkamavvrrrtt";
        // System.out.println("The string is " + (isStringHasUniqueCharacters(input) ? "is unique" : "not unique"));
-        //countDuplicateCharacters(input);
+        countDuplicateCharacters(input);
         //countDuplicateCharactersUsingStreams(input);
         countDuplicateCharactersUsingMap(input);
     }
@@ -50,7 +50,7 @@ public class UniqueCharacters {
         }
 
                 characterIntegerMap.forEach((k,v) -> {
-                    if (v > 1)
+                    if (v == 1)
                         System.out.println(k + " occurs " + v + " times");
                 });
 
